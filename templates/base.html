@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Scar Type Detection and Care Suggestions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="bg-orb orb-one"></div>
+  <div class="bg-orb orb-two"></div>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="{{ url_for('landing') }}">
+        <span class="brand-badge">SC</span>
+        <span>ScarCare</span>
+      </a>
+      <nav class="top-nav">
+        <a href="{{ url_for('landing') }}">Home</a>
+        <a href="{{ url_for('analyze') }}">Analyze</a>
+        <a href="{{ url_for('visualizer') }}">Visualizer</a>
+        {% if session.get('user_id') %}
+          <a class="ghost" href="{{ url_for('logout') }}">Logout</a>
+        {% else %}
+          <a class="ghost" href="{{ url_for('login') }}">Login</a>
+          <a class="cta" href="{{ url_for('register') }}">Register</a>
+        {% endif %}
+      </nav>
+    </div>
+  </header>
+
+  <main class="container main-content">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash-wrap">
+          {% for category, message in messages %}
+            <div class="alert {{ category }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Scar Type Detection and Care Suggestions System</p>
+    </div>
+  </footer>
+  <script src="{{ url_for('static', filename='js/upload_preview.js') }}"></script>
+</body>
+</html>

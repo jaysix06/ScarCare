@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero modern">
+  <div class="hero-copy">
+    <span class="kicker">AI Dermatology Workflow</span>
+    <h1>Scar Type Detection and Care Suggestions</h1>
+    <p>
+      Detect hypertrophic, keloid, and atrophic acne scars with a transfer-learning model
+      and review practical care suggestions in one flow.
+    </p>
+    <div class="actions">
+      <a class="btn primary" href="{{ url_for('analyze') }}">Analyze Image</a>
+      <a class="btn subtle" href="{{ url_for('visualizer') }}">Inspect Preprocessing</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-card">
+      <strong>3</strong>
+      <span>Scar labels</span>
+    </div>
+    <div class="stat-card">
+      <strong>224x224</strong>
+      <span>Input size</span>
+    </div>
+    <div class="stat-card">
+      <strong>LAB</strong>
+      <span>Color space</span>
+    </div>
+  </div>
+</section>
+
+<section class="cards feature-grid">
+  <article class="card">
+    <h3>Model-driven Analysis</h3>
+    <p>EfficientNet/ResNet checkpoint prediction with calibrated class probabilities.</p>
+  </article>
+  <article class="card">
+    <h3>Transparent Pipeline</h3>
+    <p>See guided filtering and LAB channel decomposition in the preprocessing visualizer.</p>
+  </article>
+  <article class="card">
+    <h3>Clinical Guardrail</h3>
+    <p>Built as decision support, not a replacement for licensed dermatologist diagnosis.</p>
+  </article>
+</section>
+{% endblock %}

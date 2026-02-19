@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="panel wide">
+  <div class="panel-head">
+    <h2>Preprocessing Visualizer</h2>
+    <p>Inspect each ScarNet-style stage before inference.</p>
+  </div>
+  <form method="post" enctype="multipart/form-data" class="upload-form">
+    <label for="visualizer-image">Upload Image</label>
+    <div id="visualizer-dropzone" class="upload-drop upload-dropzone">
+      <div class="upload-drop-inner">
+        <img id="visualizer-drop-preview" class="upload-drop-preview" alt="Visualizer image preview">
+        <div class="upload-drop-icon" id="visualizer-drop-icon" aria-hidden="true"></div>
+        <label for="visualizer-image" class="upload-choose-btn">Choose file</label>
+        <input id="visualizer-image" class="file-input" type="file" name="image" accept=".jpg,.jpeg,.png,.bmp,.webp,.tif,.tiff" required>
+        <p id="visualizer-filename" class="upload-file-name">No file selected</p>
+      </div>
+    </div>
+    <button class="btn primary" type="submit">Generate Visuals</button>
+  </form>
+</section>
+
+{% if visuals %}
+<section class="cards">
+  <article class="card media-card">
+    <h3>1. Resized (224x224)</h3>
+    <img class="preview" src="{{ visuals.original_resized }}" alt="Resized image">
+  </article>
+  <article class="card media-card">
+    <h3>2. Guided Filter</h3>
+    <img class="preview" src="{{ visuals.guided_filtered }}" alt="Guided filter result">
+  </article>
+  <article class="card media-card">
+    <h3>3. L Channel</h3>
+    <img class="preview" src="{{ visuals.lab_l_channel }}" alt="LAB L channel">
+  </article>
+  <article class="card media-card">
+    <h3>4. a Channel</h3>
+    <img class="preview" src="{{ visuals.lab_a_channel }}" alt="LAB a channel">
+  </article>
+  <article class="card media-card">
+    <h3>5. b Channel</h3>
+    <img class="preview" src="{{ visuals.lab_b_channel }}" alt="LAB b channel">
+  </article>
+</section>
+{% endif %}
+{% endblock %}

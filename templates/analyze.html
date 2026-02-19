@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="panel wide">
+  <div class="panel-head">
+    <h2>Analyze Scar Image</h2>
+    <p>Upload a clear photo to classify scar type and get care suggestions.</p>
+  </div>
+  <form method="post" enctype="multipart/form-data" class="upload-form">
+    <label for="analyze-image">Upload Image</label>
+    <div id="analyze-dropzone" class="upload-drop upload-dropzone">
+      <div class="upload-drop-inner">
+        <img id="analyze-drop-preview" class="upload-drop-preview" alt="Analyze image preview">
+        <div class="upload-drop-icon" id="analyze-drop-icon" aria-hidden="true"></div>
+        <label for="analyze-image" class="upload-choose-btn">Choose file</label>
+        <input id="analyze-image" class="file-input" type="file" name="image" accept=".jpg,.jpeg,.png,.bmp,.webp,.tif,.tiff" required>
+        <p id="analyze-filename" class="upload-file-name">No file selected</p>
+      </div>
+    </div>
+    <button class="btn primary" type="submit">Run Analysis</button>
+  </form>
+</section>
+
+{% if result %}
+<section class="result-grid">
+  <article class="card media-card">
+    <h3>Uploaded Image</h3>
+    <img class="preview" src="{{ result.image_path }}" alt="Uploaded image">
+  </article>
+  <article class="card">
+    <h3>Prediction Summary</h3>
+    <p class="pill">Detected: {{ result.label|capitalize }}</p>
+    <table>
+      <thead>
+        <tr><th>Class</th><th>Probability</th></tr>
+      </thead>
+      <tbody>
+        {% for class_name, prob in result.probabilities.items() %}
+          <tr>
+            <td>{{ class_name }}</td>
+            <td>{{ "%.2f"|format(prob * 100) }}%</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </article>
+  <article class="card">
+    <h3>Care Suggestions</h3>
+    <ul class="suggestions">
+      {% for item in result.suggestions %}
+        <li>{{ item }}</li>
+      {% endfor %}
+    </ul>
+    <p class="note">For medical diagnosis and treatment, consult a licensed dermatologist.</p>
+  </article>
+</section>
+{% endif %}
+{% endblock %}

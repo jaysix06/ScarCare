@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="auth-shell">
+  <article class="auth-panel">
+    <h2>Welcome Back</h2>
+    <p class="muted">Login to continue analyzing scar images and visualizing preprocessing stages.</p>
+    <form method="post">
+      <label>Email</label>
+      <input type="email" name="email" placeholder="you@example.com" required>
+      <label>Password</label>
+      <input type="password" name="password" placeholder="password" required>
+      <button class="btn primary full" type="submit">Login</button>
+    </form>
+  </article>
+</section>
+<p class="auth-footer">Need an account? <a href="{{ url_for('register') }}">Create one</a>.</p>
+{% endblock %}

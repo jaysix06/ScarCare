@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="auth-shell">
+  <article class="auth-panel">
+    <h2>Create Account</h2>
+    <p class="muted">Set up your workspace for scar detection and care suggestion review.</p>
+    <form method="post">
+      <div class="name-grid">
+        <div>
+          <label>First Name</label>
+          <input type="text" name="first_name" placeholder="Juan" required>
+        </div>
+        <div>
+          <label>Last Name</label>
+          <input type="text" name="last_name" placeholder="Dela Cruz" required>
+        </div>
+      </div>
+      <label>Email</label>
+      <input type="email" name="email" placeholder="you@example.com" required>
+      <label>Password</label>
+      <input type="password" name="password" minlength="8" placeholder="Minimum 8 characters" required>
+      <button class="btn primary full" type="submit">Create Account</button>
+    </form>
+  </article>
+</section>
+<p class="auth-footer">Already have an account? <a href="{{ url_for('login') }}">Login</a>.</p>
+{% endblock %}
